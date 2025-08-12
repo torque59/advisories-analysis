@@ -4,6 +4,7 @@ pub type GitHubAdvisory = Advisory<GitHubMetadata>;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Advisory<T = serde_json::Value> {
+    pub schema_version: Option<String>,
     pub id: String,
     pub modified: String,
     pub published: Option<String>,
@@ -124,4 +125,6 @@ pub struct GitHubMetadata {
     pub cwe_ids: Option<Vec<String>>,
     pub severity: Option<String>,
     pub github_reviewed: Option<bool>,
+    pub github_reviewed_at: Option<String>,
+    pub nvd_published_at: Option<serde_json::Value>,
 }

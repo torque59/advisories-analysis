@@ -16,6 +16,7 @@ Here's the schema for the database:
 ```sql
 CREATE TABLE advisories (
   ghsa TEXT PRIMARY KEY,
+  schema_version TEXT,
   modified TEXT NOT NULL,
   published TEXT,
   withdrawn TEXT,
@@ -24,7 +25,12 @@ CREATE TABLE advisories (
   summary TEXT,
   details TEXT,
   severity TEXT,
-  cwes TEXT
+  cwes TEXT,
+  github_reviewed INTEGER,
+  github_reviewed_at TEXT,
+  nvd_published_at TEXT,
+  ref_commits TEXT,
+  ref_pull_requests TEXT
 );
 CREATE TABLE affected_packages (
   ghsa TEXT,
@@ -34,6 +40,8 @@ CREATE TABLE affected_packages (
   versions TEXT
 );
 ```
+
+The `ref_commits` and `ref_pull_requests` fields contain JSON arrays of URLs extracted from advisory references, making it easy to identify which CVEs have associated commits or pull requests.
 
 ## Analysis notebook
 
